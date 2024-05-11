@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "esbuild src/index.js --bundle --platform=node --outfile=dist/index-out.js",
-  "package":"npm run build && node --experimental-sea-config sea-config.json && node -e \"require('fs').copyFileSync(process.execPath, 'build/Data7ModuleGenerator.exe')\" && npx postject build/Data7ModuleGenerator.exe NODE_SEA_BLOB dist/sea-prep.blob  --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2"
+    "prepare-build": "npm run build && node --experimental-sea-config sea-config.json",
+    "copy-executable": "node -e \"if (!require('fs').existsSync('build')) { require('fs').mkdirSync('build'); } require('fs').copyFileSync(process.execPath, 'build/Data7ModuleGenerator.exe');\"",
+    "postject": "npx postject build/Data7ModuleGenerator.exe NODE_SEA_BLOB dist/sea-prep.blob --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2",
+    "package": "npm run prepare-build && npm run copy-executable && npm run postject"
   },
   "keywords": [],
   "author": "",
