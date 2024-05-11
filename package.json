@@ -1,0 +1,20 @@
+{
+  "name": "data7-modules-generator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "esbuild src/index.js --bundle --platform=node --outfile=dist/index-out.js",
+  "package":"npm run build && node --experimental-sea-config sea-config.json && node -e \"require('fs').copyFileSync(process.execPath, 'build/Data7ModuleGenerator.exe')\" && npx postject build/Data7ModuleGenerator.exe NODE_SEA_BLOB dist/sea-prep.blob  --sentinel-fuse NODE_SEA_FUSE_fce680ab2cc467b6e072b8b5df1996b2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chokidar": "^3.6.0",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.21.1"
+  }
+}
